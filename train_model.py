@@ -9,6 +9,7 @@ import joblib
 
 # 1. Đọc dữ liệu
 data = pd.read_csv("sms.tsv", sep='\t', header=None, names=['label', 'message'])
+# source data: https://raw.githubusercontent.com/justmarkham/pycon-2016-tutorial/master/data/sms.tsv
 data['label_num'] = data.label.map({'ham': 0, 'spam': 1})
 
 # 2. Tách train/test
@@ -18,8 +19,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # 3. Vector hóa bằng Tfidf
 vectorizer = TfidfVectorizer(
-    stop_words='english', 
-    lowercase=True
+    stop_words='english'
 )
 X_train_vect = vectorizer.fit_transform(X_train)
 X_test_vect = vectorizer.transform(X_test)
